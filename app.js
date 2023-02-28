@@ -13,7 +13,8 @@ app.get("/", (req,res,next) => {
 
 })
 
-app.post("/create", BlogController.createBlog)
+app.post("/create", BlogController.create)
+app.post("/new", BlogController.newBlog)
 app.use(NotFoundError)
 app.use(ErrorHandler)
 
