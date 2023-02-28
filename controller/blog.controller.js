@@ -78,10 +78,23 @@ async function getBlogById(req,res,next) {
     }
 }
 
+async function deleteBlogById(req,res,next) {
+    try {
+        const {id} = req.params
+        if(!isValidObjectId(id)) throw ({status: 400, message: "Your id is not valid"})
+        const result = await BlogModel.deleteOne({_id: id});
+        res.send(result)
+    }
+    catch (err){
+        next(err)
+    }
+}
+
 module.exports ={
     create,
     newBlog,
     newBlogMany,
     getBlog,
-    getBlogById
+    getBlogById,
+    deleteBlogById
 }
