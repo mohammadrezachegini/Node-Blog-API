@@ -56,8 +56,18 @@ async function newBlogMany (req,res,next) {
     }
 }
 
+async function getBlog(req,res,next) {
+    const blogs = await BlogModel.find();
+    res.send({
+        statusCode: 200,
+        documentCount: blogs.length,
+        blogs
+    })
+}
+
 module.exports ={
     create,
     newBlog,
-    newBlogMany
+    newBlogMany,
+    getBlog
 }
