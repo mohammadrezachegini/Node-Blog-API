@@ -16,7 +16,8 @@ app.get("/", (req,res,next) => {
 app.post("/create", BlogController.create)
 app.post("/new", BlogController.newBlog)
 app.get("/insertMany", BlogController.newBlogMany)
-app.get("/blog", BlogController.getBlog)
+app.get("/blogs", BlogController.getBlog)
+app.get("/blogs/:id", BlogController.getBlogById)
 
 app.use(NotFoundError)
 app.use(ErrorHandler)

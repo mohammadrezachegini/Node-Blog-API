@@ -1,4 +1,5 @@
 const {BlogModel} = require("../model/blog.model")
+const {isValidObjectId} = require("mongoose");
 async function create (req,res,next) {
     try {
         const {title, text} = req.body;
@@ -65,9 +66,22 @@ async function getBlog(req,res,next) {
     })
 }
 
+async function getBlogById(req,res,next) {
+    try {
+        const {id} = req.params
+        if(!isValidObjectId(id)) throw ({status: 400, message: "Your id is not valid"})
+        const blog = await BlogModel.findOne({_id: id});
+        res.send(blog)
+    }
+    catch (err){
+        next(err)
+    }
+}
+
 module.exports ={
     create,
     newBlog,
     newBlogMany,
-    getBlog
+    getBlog,
+    getBlogById
 }
