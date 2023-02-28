@@ -13,3 +13,6 @@ const BlogSchema = new Schema({
 
 
 const BlogModel = model("blog", BlogSchema)
+module.exports = {
+    BlogModel
+}
