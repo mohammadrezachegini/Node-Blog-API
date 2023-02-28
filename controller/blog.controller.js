@@ -32,7 +32,32 @@ async function newBlog (req,res,next) {
     }
 }
 
+async function newBlogMany (req,res,next) {
+    try {
+        const newObjects = await BlogModel.insertMany([
+            {
+                title: "smthsmth1",
+                text: "smthsmth1"
+            },
+            {
+                title: "smthsmth2",
+                text:  "smthsmth2"
+            },
+            {
+                title: "smthsmth3",
+                text: "smthsmth3"
+            }
+        ])
+        res.send(newObjects)
+    }
+    catch (err){
+        console.log(err)
+        next(err)
+    }
+}
+
 module.exports ={
     create,
-    newBlog
+    newBlog,
+    newBlogMany
 }
