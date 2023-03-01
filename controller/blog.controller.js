@@ -90,11 +90,22 @@ async function deleteBlogById(req,res,next) {
     }
 }
 
+async function deleteBlog(req,res,next) {
+    try {
+        const result = await BlogModel.deleteMany();
+        res.send(result)
+    }
+    catch (err){
+        next(err)
+    }
+}
+
 module.exports ={
     create,
     newBlog,
     newBlogMany,
     getBlog,
     getBlogById,
-    deleteBlogById
+    deleteBlogById,
+    deleteBlog
 }

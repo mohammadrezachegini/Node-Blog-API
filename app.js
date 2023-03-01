@@ -19,6 +19,7 @@ app.get("/insertMany", BlogController.newBlogMany)
 app.get("/blogs", BlogController.getBlog)
 app.get("/blogs/:id", BlogController.getBlogById)
 app.delete("/blogs/:id", BlogController.deleteBlogById)
+app.delete("/blogs/", BlogController.deleteBlog)
 
 
 app.use(NotFoundError)
