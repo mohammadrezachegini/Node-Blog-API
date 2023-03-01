@@ -120,6 +120,26 @@ async function updateBlogById (req,res,next) {
     }
 }
 
+async function updateBlogByIdNew (req,res,next) {
+    try {
+        const  {id} = req.params;
+        const newBodyObj = omitEmpty(req.body);
+        const blog = await BlogModel.findOne({_id:id});
+        if(!blog){
+            throw({status:404, message: "not found"});
+        }
+        const result = await BlogModel.updateOne({_id:id}, {
+            $set: newBodyObj
+        })
+        // await blog.save()
+        res.send(result)
+    }
+    catch (err){
+        console.log(err)
+        next(err)
+    }
+}
+
 
 
 module.exports ={
@@ -130,5 +150,6 @@ module.exports ={
     getBlogById,
     deleteBlogById,
     deleteBlog,
-    updateBlogById
+    updateBlogById,
+    updateBlogByIdNew
 }

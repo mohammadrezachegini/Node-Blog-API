@@ -21,6 +21,7 @@ app.get("/blogs/:id", BlogController.getBlogById)
 app.delete("/blogs/:id", BlogController.deleteBlogById)
 app.delete("/blogs/", BlogController.deleteBlog)
 app.put("/blogs/:id", BlogController.updateBlogById)
+app.patch("/blogs/:id", BlogController.updateBlogByIdNew)
 
 
 app.use(NotFoundError)
