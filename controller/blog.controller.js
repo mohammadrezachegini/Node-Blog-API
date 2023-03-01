@@ -1,5 +1,6 @@
 const {BlogModel} = require("../model/blog.model")
 const {isValidObjectId} = require("mongoose");
+const omitEmpty = require("omit-empty");
 async function create (req,res,next) {
     try {
         const {title, text} = req.body;
@@ -100,6 +101,27 @@ async function deleteBlog(req,res,next) {
     }
 }
 
+
+async function updateBlogById (req,res,next) {
+    try {
+        const  {id} = req.params;
+        const newBodyObj = omitEmpty(req.body);
+        const blog = await BlogModel.findOne({_id:id});
+        if(!blog){
+            throw({status:404, message: "not found"});
+        }
+        Object.assign(blog, newBodyObj);
+        await blog.save()
+        res.send(blog)
+    }
+    catch (err){
+        console.log(err)
+        next(err)
+    }
+}
+
+
+
 module.exports ={
     create,
     newBlog,
@@ -107,5 +129,6 @@ module.exports ={
     getBlog,
     getBlogById,
     deleteBlogById,
-    deleteBlog
+    deleteBlog,
+    updateBlogById
 }
